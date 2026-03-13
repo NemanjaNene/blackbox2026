@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackBox Studio | The Web Platform for Agencies and Enterprises</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three@0.170.0",
+      "postprocessing": "https://esm.sh/postprocessing@6.36.4"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== STAGGERED MENU ===== -->
+  <div class="staggered-menu-wrapper fixed-wrapper" data-position="right">
+    <div class="sm-prelayers" aria-hidden="true">
+      <div class="sm-prelayer" style="background:#1a1a40"></div>
+      <div class="sm-prelayer" style="background:#0f0f2e"></div>
+    </div>
+    <header class="staggered-menu-header" aria-label="Main navigation header">
+      <div class="sm-logo" aria-label="Logo"></div>
+      <button class="sm-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="staggered-menu-panel" type="button">
+        <span class="sm-toggle-textWrap" aria-hidden="true">
+          <span class="sm-toggle-textInner">
+            <span class="sm-toggle-line">Menu</span>
+            <span class="sm-toggle-line">Close</span>
+          </span>
+        </span>
+        <span class="sm-icon" aria-hidden="true">
+          <span class="sm-icon-line"></span>
+          <span class="sm-icon-line sm-icon-line-v"></span>
+        </span>
+      </button>
+    </header>
+    <aside id="staggered-menu-panel" class="staggered-menu-panel" aria-hidden="true">
+      <div class="sm-panel-inner">
+        <ul class="sm-panel-list" role="list" data-numbering>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="1"><span class="sm-panel-itemLabel">Home</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="2"><span class="sm-panel-itemLabel">About</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="3"><span class="sm-panel-itemLabel">Services</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="4"><span class="sm-panel-itemLabel">Contact</span></a></li>
+        </ul>
+        <div class="sm-socials" aria-label="Social links">
+          <h3 class="sm-socials-title">Socials</h3>
+          <ul class="sm-socials-list" role="list">
+            <li class="sm-socials-item"><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="sm-socials-link">Twitter</a></li>
+            <li class="sm-socials-item"><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sm-socials-link">GitHub</a></li>
+            <li class="sm-socials-item"><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="sm-socials-link">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-hyperspeed" id="hyperspeed-container"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-wrap">
+      <h1 class="hero-title text-type" id="heroTextType" data-r></h1>
+    </div>
+  </section>
+
+  <div class="dark-wrap">
+  <!-- ===== TARGET CURSOR SECTION ===== -->
+  <section class="tc-section" id="target-cursor-section">
+    <div class="container tc-wrap">
+      <div class="tc-text" data-r>
+        <div class="falling-text-container" id="fallingTextContainer">
+          <div class="falling-text-target"></div>
+          <div class="falling-text-canvas"></div>
+        </div>
+      </div>
+      <div class="tc-targets" data-r>
+        <div class="tc-target-row">
+          <button class="cursor-target tc-btn">Explore</button>
+          <button class="cursor-target tc-btn">Design</button>
+          <button class="cursor-target tc-btn">Develop</button>
+        </div>
+        <div class="tc-target-row">
+          <div class="cursor-target tc-box">
+            <span class="tc-box-label">Pixel-perfect</span>
+          </div>
+          <div class="cursor-target tc-box tc-box--wide">
+            <span class="tc-box-label">Custom built</span>
+          </div>
+        </div>
+        <div class="tc-target-row">
+          <div class="cursor-target tc-box tc-box--wide">
+            <span class="tc-box-label">Performance first</span>
+          </div>
+          <div class="cursor-target tc-box">
+            <span class="tc-box-label">Responsive</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARD SWAP ===== -->
+  <section class="cardswap-section" data-r>
+    <div class="container">
+      <div class="cardswap-wrap">
+        <div class="cardswap-text">
+          <span class="small-label" data-r>Our Work</span>
+          <h2 class="cardswap-heading" data-r>Projects we've<br>brought to life</h2>
+          <p class="cardswap-desc" data-r>From concept to launch — custom-built websites that blend striking design with solid performance.</p>
+          <a href="projects.html" class="btn-cta btn-cta--dark" data-r>View all projects <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="cardswap-cards">
+          <div class="card-swap-container" id="cardSwapContainer">
+            <div class="card card--site">
+              <div class="card-site-frame">
+                <iframe src="https://joyfruitspremium.com/en/" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+              </div>
+              <div class="card-site-info">
+                <span class="card-site-name">JoyFruits</span>
+                <span class="card-site-type">Caribbean Luxury Brandy</span>
+              </div>
+            </div>
+            <div class="card card--site card--soon">
+              <div class="card-site-frame card-site-frame--empty">
+                <span>Coming Soon</span>
+              </div>
+              <div class="card-site-info">
+                <span class="card-site-name">Project 02</span>
+                <span class="card-site-type">Details coming soon</span>
+              </div>
+            </div>
+            <div class="card card--site card--soon">
+              <div class="card-site-frame card-site-frame--empty">
+                <span>Coming Soon</span>
+              </div>
+              <div class="card-site-info">
+                <span class="card-site-name">Project 03</span>
+                <span class="card-site-type">Details coming soon</span>
+              </div>
+            </div>
+            <div class="card card--site card--soon">
+              <div class="card-site-frame card-site-frame--empty">
+                <span>Coming Soon</span>
+              </div>
+              <div class="card-site-info">
+                <span class="card-site-name">Project 04</span>
+                <span class="card-site-type">Details coming soon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===== TOOLS MARQUEE ===== -->
+  <section class="tools-section">
+    <div class="container">
+      <span class="tools-label">Our Toolkit</span>
+      <h2 class="tools-heading">Technologies we work with</h2>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee-track marquee-track--forward">
+        <div class="marquee-row">
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#E44D26" d="M1.5 0h21l-1.91 21.56L11.97 24l-8.65-2.44z"/><path fill="#F16529" d="M12 22.16l6.99-1.94L20.67 1.5H12z"/><path fill="#fff" d="M12 5.56H7.5l.32 3.57H12V5.56zm0 7.8l-4.12-1.12.28 3.13L12 16.5v-3.14z"/></svg>HTML5</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#1572B6" d="M1.5 0h21l-1.91 21.56L11.97 24l-8.65-2.44z"/><path fill="#33A9DC" d="M12 22.16l6.99-1.94L20.67 1.5H12z"/><path fill="#fff" d="M12 9.13H7.5l.32 3.57H12V9.13zm0-3.57h8.18l-.28 3.13H12V5.56z"/></svg>CSS3</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#F7DF1E" d="M0 0h24v24H0z"/><path d="M6.3 19.5c.4.8 1.3 1.5 2.3 1.5 1 0 1.6-.5 1.6-1.2 0-.8-.7-1.2-1.8-1.7l-.6-.3C6.2 17 5 16 5 14.3c0-1.5 1.2-2.7 3-2.7 1.3 0 2.3.5 2.9 1.7l-1.6 1c-.4-.6-.7-.9-1.4-.9-.6 0-1 .4-1 .9 0 .6.4 .9 1.3 1.3l.6.3c2 .8 3.2 1.7 3.2 3.6 0 2.1-1.6 3.2-3.8 3.2-2.1 0-3.5-1-4.2-2.4l1.3-.8zm8.6-.2c.3.5.6 1 1.3 1s1.1-.3 1.1-1.3V12h2v7.1c0 2.2-1.3 3.2-3.1 3.2-1.7 0-2.6-.9-3.1-1.9l1.8-1.1z"/></svg>JavaScript</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="11" fill="#61DAFB" opacity=".15"/><circle cx="12" cy="12" r="2.2" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(120 12 12)"/></svg>React</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#000" d="M12 1L1.6 7v12L12 23l10.4-4V7L12 1zm-1 19.5l-7-3.2V8.7L11 12v8.5zm1-9.7L5 7.5 12 3l7 4.5-7 3.3zm8 6.5l-7 3.2V12l7-3.3v8.6z"/></svg>Three.js</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><rect width="24" height="24" rx="4" fill="#0ACF83"/><circle cx="9" cy="6" r="3" fill="#F24E1E"/><circle cx="15" cy="6" r="3" fill="#FF7262"/><circle cx="9" cy="12" r="3" fill="#A259FF"/><circle cx="15" cy="12" r="3" fill="#1ABCFE"/><circle cx="9" cy="18" r="3" fill="#0ACF83"/></svg>Figma</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#88CE02" d="M12 2L1 7.5v9L12 22l11-5.5v-9L12 2z"/><path fill="#fff" d="M12 5.3L4 9.5v5l8 4.2 8-4.2v-5L12 5.3z" opacity=".3"/></svg>GSAP</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#339933" d="M12 1.5C6.2 1.5 1.5 6.2 1.5 12S6.2 22.5 12 22.5 22.5 17.8 22.5 12 17.8 1.5 12 1.5zm5.6 13.8c-.3.4-.8.7-1.4.7-.4 0-.7-.1-1.4-.5l-2.1-1.2c-.5-.3-.7-.7-.7-1.3V8.5c0-.4.3-.8.8-.8s.8.3.8.8v4.3l2 1.1c.4.2.7.3.9.3.2 0 .3-.1.4-.2.2-.3.1-.6-.2-.8l-2.3-1.3V6.7c0-.4.3-.8.8-.8s.8.3.8.8v4.5l1.3.7c.7.4 1 1 1 1.7 0 .6-.3 1.2-.7 1.7z"/></svg>Node.js</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#3178C6" d="M0 12v12h24V0H0v12zm19.3-1H14v8.5c0 .9.5 1.2 1.7 1.2.5 0 1-.1 1.5-.2v2.2c-.7.3-1.5.4-2.3.4-2.4 0-3.5-1-3.5-3.3V11H9.5V8.8h1.9V5.5l2.6-.8v4.1h5.3v2.2z"/></svg>TypeScript</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#000" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm6.6 18.6c-.3.4-.7.6-1.2.6-.3 0-.5-.1-.8-.2-2.5-1.5-5.6-1.8-9.3-1-.4.1-.9-.2-1-.6-.1-.4.2-.9.6-1 4-1 7.5-.6 10.3 1.1.4.2.5.8.4 1.1zm1.8-3.5c-.3.5-.9.7-1.4.4-2.9-1.8-7.2-2.3-10.6-1.3-.5.2-1-.2-1.2-.6-.2-.5.2-1 .6-1.2 3.9-1.2 8.7-.6 12 1.4.5.3.7.9.6 1.3zm.1-3.7C16.5 9 9.6 8.8 5.6 10c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.6-1.4 12.2-1.1 17 1.7.5.3.7 1 .4 1.6-.3.4-1 .6-1.8.2z"/></svg>Git</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#FF6C37" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 3.6c.5 0 .9.3 1 .8l2.3 8.3c.1.4.4.6.7.6h4.4c.5 0 .9.4.9.9 0 .3-.2.6-.4.8l-3.5 2.6c-.3.3-.5.7-.3 1.1l1.3 4.2c.2.5-.1 1-.5 1.2-.2.1-.5.1-.7 0L12.5 21c-.3-.2-.7-.2-1 0l-4.7 3.1c-.4.3-1 .2-1.2-.3-.1-.2-.1-.5 0-.7l1.3-4.2c.1-.4 0-.8-.3-1.1L3 15.2c-.4-.3-.5-.9-.2-1.3.2-.2.4-.3.7-.3h4.4c.4 0 .7-.3.8-.7L11 5c.1-.6.5-.9 1-1z"/></svg>Postman</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#007ACC" d="M23.15 2.59L18.67.09a1.9 1.9 0 00-1.9 0l-4.43 2.56a1.9 1.9 0 00-.95 1.64v1.6l-4.43 2.56a1.9 1.9 0 00-.95 1.64v5.12a1.9 1.9 0 00.95 1.64l4.48 2.59a1.9 1.9 0 001.9 0l4.43-2.56a1.9 1.9 0 00.95-1.64v-1.6l4.43-2.56a1.9 1.9 0 00.95-1.64V4.23a1.9 1.9 0 00-.95-1.64z"/></svg>VS Code</div>
+        </div>
+        <div class="marquee-row" aria-hidden="true">
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#E44D26" d="M1.5 0h21l-1.91 21.56L11.97 24l-8.65-2.44z"/><path fill="#F16529" d="M12 22.16l6.99-1.94L20.67 1.5H12z"/><path fill="#fff" d="M12 5.56H7.5l.32 3.57H12V5.56zm0 7.8l-4.12-1.12.28 3.13L12 16.5v-3.14z"/></svg>HTML5</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#1572B6" d="M1.5 0h21l-1.91 21.56L11.97 24l-8.65-2.44z"/><path fill="#33A9DC" d="M12 22.16l6.99-1.94L20.67 1.5H12z"/><path fill="#fff" d="M12 9.13H7.5l.32 3.57H12V9.13zm0-3.57h8.18l-.28 3.13H12V5.56z"/></svg>CSS3</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#F7DF1E" d="M0 0h24v24H0z"/><path d="M6.3 19.5c.4.8 1.3 1.5 2.3 1.5 1 0 1.6-.5 1.6-1.2 0-.8-.7-1.2-1.8-1.7l-.6-.3C6.2 17 5 16 5 14.3c0-1.5 1.2-2.7 3-2.7 1.3 0 2.3.5 2.9 1.7l-1.6 1c-.4-.6-.7-.9-1.4-.9-.6 0-1 .4-1 .9 0 .6.4 .9 1.3 1.3l.6.3c2 .8 3.2 1.7 3.2 3.6 0 2.1-1.6 3.2-3.8 3.2-2.1 0-3.5-1-4.2-2.4l1.3-.8zm8.6-.2c.3.5.6 1 1.3 1s1.1-.3 1.1-1.3V12h2v7.1c0 2.2-1.3 3.2-3.1 3.2-1.7 0-2.6-.9-3.1-1.9l1.8-1.1z"/></svg>JavaScript</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="11" fill="#61DAFB" opacity=".15"/><circle cx="12" cy="12" r="2.2" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(120 12 12)"/></svg>React</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#000" d="M12 1L1.6 7v12L12 23l10.4-4V7L12 1zm-1 19.5l-7-3.2V8.7L11 12v8.5zm1-9.7L5 7.5 12 3l7 4.5-7 3.3zm8 6.5l-7 3.2V12l7-3.3v8.6z"/></svg>Three.js</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><rect width="24" height="24" rx="4" fill="#0ACF83"/><circle cx="9" cy="6" r="3" fill="#F24E1E"/><circle cx="15" cy="6" r="3" fill="#FF7262"/><circle cx="9" cy="12" r="3" fill="#A259FF"/><circle cx="15" cy="12" r="3" fill="#1ABCFE"/><circle cx="9" cy="18" r="3" fill="#0ACF83"/></svg>Figma</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#88CE02" d="M12 2L1 7.5v9L12 22l11-5.5v-9L12 2z"/><path fill="#fff" d="M12 5.3L4 9.5v5l8 4.2 8-4.2v-5L12 5.3z" opacity=".3"/></svg>GSAP</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#339933" d="M12 1.5C6.2 1.5 1.5 6.2 1.5 12S6.2 22.5 12 22.5 22.5 17.8 22.5 12 17.8 1.5 12 1.5zm5.6 13.8c-.3.4-.8.7-1.4.7-.4 0-.7-.1-1.4-.5l-2.1-1.2c-.5-.3-.7-.7-.7-1.3V8.5c0-.4.3-.8.8-.8s.8.3.8.8v4.3l2 1.1c.4.2.7.3.9.3.2 0 .3-.1.4-.2.2-.3.1-.6-.2-.8l-2.3-1.3V6.7c0-.4.3-.8.8-.8s.8.3.8.8v4.5l1.3.7c.7.4 1 1 1 1.7 0 .6-.3 1.2-.7 1.7z"/></svg>Node.js</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#3178C6" d="M0 12v12h24V0H0v12zm19.3-1H14v8.5c0 .9.5 1.2 1.7 1.2.5 0 1-.1 1.5-.2v2.2c-.7.3-1.5.4-2.3.4-2.4 0-3.5-1-3.5-3.3V11H9.5V8.8h1.9V5.5l2.6-.8v4.1h5.3v2.2z"/></svg>TypeScript</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#000" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm6.6 18.6c-.3.4-.7.6-1.2.6-.3 0-.5-.1-.8-.2-2.5-1.5-5.6-1.8-9.3-1-.4.1-.9-.2-1-.6-.1-.4.2-.9.6-1 4-1 7.5-.6 10.3 1.1.4.2.5.8.4 1.1zm1.8-3.5c-.3.5-.9.7-1.4.4-2.9-1.8-7.2-2.3-10.6-1.3-.5.2-1-.2-1.2-.6-.2-.5.2-1 .6-1.2 3.9-1.2 8.7-.6 12 1.4.5.3.7.9.6 1.3zm.1-3.7C16.5 9 9.6 8.8 5.6 10c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.6-1.4 12.2-1.1 17 1.7.5.3.7 1 .4 1.6-.3.4-1 .6-1.8.2z"/></svg>Git</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#FF6C37" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 3.6c.5 0 .9.3 1 .8l2.3 8.3c.1.4.4.6.7.6h4.4c.5 0 .9.4.9.9 0 .3-.2.6-.4.8l-3.5 2.6c-.3.3-.5.7-.3 1.1l1.3 4.2c.2.5-.1 1-.5 1.2-.2.1-.5.1-.7 0L12.5 21c-.3-.2-.7-.2-1 0l-4.7 3.1c-.4.3-1 .2-1.2-.3-.1-.2-.1-.5 0-.7l1.3-4.2c.1-.4 0-.8-.3-1.1L3 15.2c-.4-.3-.5-.9-.2-1.3.2-.2.4-.3.7-.3h4.4c.4 0 .7-.3.8-.7L11 5c.1-.6.5-.9 1-1z"/></svg>Postman</div>
+          <div class="tool-chip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#007ACC" d="M23.15 2.59L18.67.09a1.9 1.9 0 00-1.9 0l-4.43 2.56a1.9 1.9 0 00-.95 1.64v1.6l-4.43 2.56a1.9 1.9 0 00-.95 1.64v5.12a1.9 1.9 0 00.95 1.64l4.48 2.59a1.9 1.9 0 001.9 0l4.43-2.56a1.9 1.9 0 00.95-1.64v-1.6l4.43-2.56a1.9 1.9 0 00.95-1.64V4.23a1.9 1.9 0 00-.95-1.64z"/></svg>VS Code</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact-section">
+    <div class="container contact-wrap">
+      <div class="contact-text">
+        <span class="contact-label">Get in Touch</span>
+        <h2 class="contact-heading">Let's build<br>something great</h2>
+        <p class="contact-desc">Have a project in mind? Scan the QR code or hover over it to reveal our number. We'd love to hear from you.</p>
+        <a href="mailto:hello@blackbox.com" class="contact-email">hello@blackbox.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="pixel-transition-card" id="pixelCard">
+          <div class="pt-default">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=tel%3A%2B381616465642&bgcolor=111111&color=ffffff&margin=30" alt="QR Code - Call us" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="pt-active">
+            <div class="pt-active-content">
+              <span class="pt-phone-icon"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+              <p class="pt-cta-text">Ready to talk?</p>
+              <a href="tel:+381616465642" class="pt-phone-number">+381 61 646 5642</a>
+              <p class="pt-sub">Tap to call directly</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="stickerArea">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <p>&copy; 2026 BlackBox. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="mailto:hello@blackbox.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cardswap.js" type="module"></script>
+  <script src="js/targetcursor.js" type="module"></script>
+  <script src="js/staggeredmenu.js" type="module"></script>
+  <script type="module">
+    import { initStaggeredMenu } from './js/staggeredmenu.js';
+    initStaggeredMenu({
+      position: 'right',
+      menuButtonColor: '#ffffff',
+      openMenuButtonColor: '#60a5fa',
+      accentColor: '#60a5fa',
+      changeMenuColorOnOpen: true,
+      closeOnClickAway: true
+    });
+  </script>
+  <script type="module">
+    import { initTargetCursor } from './js/targetcursor.js';
+    initTargetCursor({ spinDuration: 2, hideDefaultCursor: true, parallaxOn: true, hoverDuration: 0.2 });
+  </script>
+  <script type="module">
+    import { initTextType } from './js/texttype.js';
+    const heroTitle = document.getElementById('heroTextType');
+    if (heroTitle) {
+      initTextType(heroTitle, {
+        texts: [
+          'We are BlackBox.',
+          'We design with impact.',
+          'We deliver at scale.',
+          'We build experiences.'
+        ],
+        typingSpeed: 75,
+        deletingSpeed: 50,
+        pauseDuration: 1500,
+        showCursor: true,
+        cursorCharacter: '_',
+        cursorBlinkDuration: 0.5
+      });
+    }
+  </script>
+  <script type="module">
+    import { initFallingText } from './js/fallingtext.js';
+    const ftContainer = document.getElementById('fallingTextContainer');
+    if (ftContainer) {
+      initFallingText(ftContainer, {
+        text: 'We build websites that move people. From bold visuals to seamless interactions, every pixel is placed with purpose. Your brand deserves more than a template.',
+        highlightWords: ['build', 'move', 'bold', 'seamless', 'pixel', 'brand'],
+        highlightClass: 'highlighted',
+        trigger: 'scroll',
+        backgroundColor: 'transparent',
+        wireframes: false,
+        gravity: 0.56,
+        fontSize: '1.8rem',
+        mouseConstraintStiffness: 0.9
+      });
+    }
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('cardSwapContainer');
+      if (container && typeof gsap !== 'undefined') {
+        const cards = Array.from(container.querySelectorAll('.card'));
+        const total = cards.length;
+        const cardDistance = 80;
+        const verticalDistance = 115;
+        const skew = 6;
+        const delay = 5000;
+        const config = { ease: 'elastic.out(0.6,0.9)', durDrop: 2, durMove: 2, durReturn: 2, promoteOverlap: 0.9, returnDelay: 0.05 };
+
+        const makeSlot = (i) => ({ x: i*cardDistance, y: -i*verticalDistance, z: -i*cardDistance*1.5, zIndex: total-i });
+        const place = (el, slot) => gsap.set(el, { x:slot.x, y:slot.y, z:slot.z, xPercent:-50, yPercent:-50, skewY:skew, transformOrigin:'center center', zIndex:slot.zIndex, force3D:true });
+
+        const order = Array.from({length:total},(_,i)=>i);
+        cards.forEach((el,i) => place(el, makeSlot(i)));
+        let currentTl = null, intervalId = null;
+
+        const swap = () => {
+          if(order.length<2)return;
+          const front = order.shift();
+          const elFront = cards[front];
+          const tl = gsap.timeline();
+          currentTl = tl;
+          tl.to(elFront, {y:'+=500', duration:config.durDrop, ease:config.ease});
+          tl.addLabel('promote', '-='+config.durDrop*config.promoteOverlap);
+          order.forEach((idx,i) => {
+            const el=cards[idx], slot=makeSlot(i);
+            tl.set(el,{zIndex:slot.zIndex},'promote');
+            tl.to(el,{x:slot.x,y:slot.y,z:slot.z,duration:config.durMove,ease:config.ease},'promote+='+i*0.15);
+          });
+          const backSlot = makeSlot(total-1);
+          tl.addLabel('return','promote+='+config.durMove*config.returnDelay);
+          tl.call(()=>gsap.set(elFront,{zIndex:backSlot.zIndex}),undefined,'return');
+          tl.to(elFront,{x:backSlot.x,y:backSlot.y,z:backSlot.z,duration:config.durReturn,ease:config.ease},'return');
+          tl.call(()=>order.push(front));
+        };
+        swap();
+        intervalId = setInterval(swap, delay);
+        container.addEventListener('mouseenter', ()=>{currentTl?.pause();clearInterval(intervalId);});
+        container.addEventListener('mouseleave', ()=>{currentTl?.play();intervalId=setInterval(swap,delay);});
+      }
+    });
+  </script>
+  <script type="module">
+    import { initPixelTransition } from './js/pixeltransition.js';
+    const pc = document.getElementById('pixelCard');
+    if (pc) {
+      initPixelTransition(pc, {
+        gridSize: 8,
+        pixelColor: '#60a5fa',
+        animationStepDuration: 0.4,
+        once: false,
+        aspectRatio: '100%'
+      });
+    }
+  </script>
+  <script type="module">
+    import { initHyperspeed } from './js/hyperspeed.js';
+    const container = document.getElementById('hyperspeed-container');
+    if (container) {
+      initHyperspeed(container, {
+        distortion: 'turbulentDistortion',
+        length: 400,
+        roadWidth: 9,
+        islandWidth: 2,
+        lanesPerRoad: 3,
+        fov: 90,
+        fovSpeedUp: 150,
+        speedUp: 2,
+        carLightsFade: 0.4,
+        totalSideLightSticks: 50,
+        lightPairsPerRoadWay: 50,
+        shoulderLinesWidthPercentage: 0.05,
+        brokenLinesWidthPercentage: 0.1,
+        brokenLinesLengthPercentage: 0.5,
+        lightStickWidth: [0.12, 0.5],
+        lightStickHeight: [1.3, 1.7],
+        movingAwaySpeed: [60, 80],
+        movingCloserSpeed: [-120, -160],
+        carLightsLength: [400 * 0.05, 400 * 0.15],
+        carLightsRadius: [0.05, 0.14],
+        carWidthPercentage: [0.3, 0.5],
+        carShiftX: [-0.2, 0.2],
+        carFloorSeparation: [0.05, 1],
+        colors: {
+          roadColor: 0x080820,
+          islandColor: 0x0a0a28,
+          background: 0x060618,
+          shoulderLines: 0x1a1a45,
+          brokenLines: 0x1a1a45,
+          leftCars: [0x3b82f6, 0x60a5fa, 0x818cf8],
+          rightCars: [0x06b6d4, 0x22d3ee, 0xa78bfa],
+          sticks: 0x7dd3fc
+        }
+      });
+    }
+  </script>
+</body>
+</html>
