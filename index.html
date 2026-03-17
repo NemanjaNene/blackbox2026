@@ -15,7 +15,7 @@
   {
     "imports": {
       "three": "https://esm.sh/three@0.170.0",
-      "postprocessing": "https://esm.sh/postprocessing@6.36.4"
+      "three/examples/jsm/environments/RoomEnvironment.js": "https://esm.sh/three@0.170.0/examples/jsm/environments/RoomEnvironment.js"
     }
   }
   </script>
@@ -46,10 +46,10 @@
     <aside id="staggered-menu-panel" class="staggered-menu-panel" aria-hidden="true">
       <div class="sm-panel-inner">
         <ul class="sm-panel-list" role="list" data-numbering>
-          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="1"><span class="sm-panel-itemLabel">Home</span></a></li>
-          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="2"><span class="sm-panel-itemLabel">About</span></a></li>
-          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="3"><span class="sm-panel-itemLabel">Services</span></a></li>
-          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#" data-index="4"><span class="sm-panel-itemLabel">Contact</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html" data-index="1"><span class="sm-panel-itemLabel">Home</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="about.html" data-index="2"><span class="sm-panel-itemLabel">About</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="projects.html" data-index="3"><span class="sm-panel-itemLabel">Projects</span></a></li>
+          <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="contact.html" data-index="4"><span class="sm-panel-itemLabel">Contact</span></a></li>
         </ul>
         <div class="sm-socials" aria-label="Social links">
           <h3 class="sm-socials-title">Socials</h3>
@@ -65,7 +65,7 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <div class="hero-hyperspeed" id="hyperspeed-container"></div>
+    <div class="hero-ballpit" id="heroBallpit"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-wrap">
       <h1 class="hero-title text-type" id="heroTextType" data-r></h1>
@@ -129,13 +129,13 @@
                 <span class="card-site-type">Caribbean Luxury Brandy</span>
               </div>
             </div>
-            <div class="card card--site card--soon">
-              <div class="card-site-frame card-site-frame--empty">
-                <span>Coming Soon</span>
+            <div class="card card--site">
+              <div class="card-site-frame">
+                <iframe src="https://kompresoring.com/" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
               </div>
               <div class="card-site-info">
-                <span class="card-site-name">Project 02</span>
-                <span class="card-site-type">Details coming soon</span>
+                <span class="card-site-name">Kompresor ING</span>
+                <span class="card-site-type">Construction & Infrastructure</span>
               </div>
             </div>
             <div class="card card--site card--soon">
@@ -237,11 +237,10 @@
         <p>&copy; 2026 BlackBox. All rights reserved.</p>
       </div>
       <div class="footer-links">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
-        <a href="mailto:hello@blackbox.com">Contact</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
   </footer>
@@ -361,45 +360,16 @@
     }
   </script>
   <script type="module">
-    import { initHyperspeed } from './js/hyperspeed.js';
-    const container = document.getElementById('hyperspeed-container');
-    if (container) {
-      initHyperspeed(container, {
-        distortion: 'turbulentDistortion',
-        length: 400,
-        roadWidth: 9,
-        islandWidth: 2,
-        lanesPerRoad: 3,
-        fov: 90,
-        fovSpeedUp: 150,
-        speedUp: 2,
-        carLightsFade: 0.4,
-        totalSideLightSticks: 50,
-        lightPairsPerRoadWay: 50,
-        shoulderLinesWidthPercentage: 0.05,
-        brokenLinesWidthPercentage: 0.1,
-        brokenLinesLengthPercentage: 0.5,
-        lightStickWidth: [0.12, 0.5],
-        lightStickHeight: [1.3, 1.7],
-        movingAwaySpeed: [60, 80],
-        movingCloserSpeed: [-120, -160],
-        carLightsLength: [400 * 0.05, 400 * 0.15],
-        carLightsRadius: [0.05, 0.14],
-        carWidthPercentage: [0.3, 0.5],
-        carShiftX: [-0.2, 0.2],
-        carFloorSeparation: [0.05, 1],
-        colors: {
-          roadColor: 0x080820,
-          islandColor: 0x0a0a28,
-          background: 0x060618,
-          shoulderLines: 0x1a1a45,
-          brokenLines: 0x1a1a45,
-          leftCars: [0x3b82f6, 0x60a5fa, 0x818cf8],
-          rightCars: [0x06b6d4, 0x22d3ee, 0xa78bfa],
-          sticks: 0x7dd3fc
-        }
-      });
-    }
+    import { initBallpit } from './js/ballpit.js';
+    const bp = document.getElementById('heroBallpit');
+    if (bp) initBallpit(bp, {
+      count: 100,
+      gravity: 0.01,
+      friction: 0.9975,
+      wallBounce: 0.95,
+      followCursor: false,
+      colors: [0x060618, 0x3b82f6, 0x22d3ee]
+    });
   </script>
 </body>
 </html>

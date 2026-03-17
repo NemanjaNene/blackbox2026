@@ -132,8 +132,7 @@ img{max-width:100%;display:block}
    HERO
    ============================================= */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:flex-start;text-align:left;background:#060618;overflow:hidden}
-.hero-hyperspeed{position:absolute;inset:0;width:100%;height:100%;z-index:1}
-.hero-hyperspeed canvas{width:100%!important;height:100%!important;display:block}
+.hero-ballpit{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:hidden}
 .hero-overlay{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at center,rgba(6,6,24,.1) 0%,rgba(6,6,24,.55) 100%);pointer-events:none}
 .hero-wrap{position:relative;z-index:3;padding:0 20px;max-width:580px}
 .hero-title{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:300;line-height:1.1;letter-spacing:-.03em;margin-bottom:24px;color:#fff;min-height:1.2em}

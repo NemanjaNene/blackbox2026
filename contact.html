@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackBox | Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --blue: #60a5fa;
+      --pointer-x: 50%; --pointer-y: 50%;
+      --pointer-from-center: 0; --pointer-from-top: 0.5; --pointer-from-left: 0.5;
+      --card-opacity: 0; --rotate-x: 0deg; --rotate-y: 0deg;
+      --background-x: 50%; --background-y: 50%;
+      --grain: none; --icon: none;
+      --behind-glow-color: rgba(125,190,255,0.67);
+      --behind-glow-size: 50%;
+      --inner-gradient: none;
+      --sunpillar-1: hsl(2,100%,73%); --sunpillar-2: hsl(53,100%,69%);
+      --sunpillar-3: hsl(93,100%,69%); --sunpillar-4: hsl(176,100%,76%);
+      --sunpillar-5: hsl(228,100%,74%); --sunpillar-6: hsl(283,100%,73%);
+      --sunpillar-clr-1: var(--sunpillar-1); --sunpillar-clr-2: var(--sunpillar-2);
+      --sunpillar-clr-3: var(--sunpillar-3); --sunpillar-clr-4: var(--sunpillar-4);
+      --sunpillar-clr-5: var(--sunpillar-5); --sunpillar-clr-6: var(--sunpillar-6);
+      --card-radius: 30px;
+    }
+    *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: var(--font); background:#0a0a14; color:#fff; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+
+    .dot-grid-bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .dot-grid-bg canvas { pointer-events:auto; }
+
+    .back {
+      position:fixed; top:24px; left:24px; z-index:50;
+      font-size:.8rem; font-weight:500; letter-spacing:.04em; text-transform:uppercase;
+      color:var(--blue); background:rgba(96,165,250,.08);
+      border:1px solid rgba(96,165,250,.2); padding:10px 20px; border-radius:100px;
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); transition:all .3s ease;
+      display:flex; align-items:center; gap:8px;
+    }
+    .back svg { width:14px; height:14px; transition:transform .3s ease; }
+    .back:hover { color:#fff; background:rgba(96,165,250,.18); border-color:rgba(96,165,250,.45); box-shadow:0 0 20px rgba(96,165,250,.15); }
+    .back:hover svg { transform:translateX(-3px); }
+
+    .page { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:120px 40px 80px; }
+
+    .contact-hero { text-align:center; margin-bottom:80px; }
+    .contact-label { display:block; font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:16px; }
+    .contact-title { font-size:clamp(2.2rem,5vw,3.6rem); font-weight:300; letter-spacing:-.03em; line-height:1.15; }
+    .contact-title span { color:var(--blue); }
+
+    .cards-row { display:flex; justify-content:center; gap:60px; flex-wrap:wrap; margin-bottom:80px; }
+
+    /* ProfileCard */
+    .pc-card-wrapper { perspective:500px; transform:translate3d(0,0,.1px); position:relative; touch-action:none; }
+    .pc-behind {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      background:radial-gradient(circle at var(--pointer-x) var(--pointer-y),var(--behind-glow-color) 0%,transparent var(--behind-glow-size));
+      filter:blur(50px) saturate(1.1); opacity:calc(.8 * var(--card-opacity)); transition:opacity 200ms ease;
+    }
+    .pc-card-wrapper:hover,.pc-card-wrapper.active { --card-opacity:1; }
+    .pc-card {
+      height:80svh; max-height:540px; display:grid; aspect-ratio:0.718;
+      border-radius:var(--card-radius); position:relative;
+      background-blend-mode:color-dodge,normal,normal,normal;
+      animation:glow-bg 12s linear infinite;
+      box-shadow:rgba(0,0,0,.8) calc((var(--pointer-from-left)*10px)-3px) calc((var(--pointer-from-top)*20px)-6px) 20px -5px;
+      transition:transform 1s ease; transform:translateZ(0) rotateX(0deg) rotateY(0deg);
+      background:rgba(0,0,0,.9); backface-visibility:hidden; overflow:hidden;
+    }
+    .pc-card:hover,.pc-card.active { transition:none; transform:translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x)); }
+    .pc-card-shell.entering .pc-card { transition:transform 180ms ease-out; }
+    .pc-card-shell { position:relative; z-index:1; }
+    .pc-card * { display:grid; grid-area:1/-1; border-radius:var(--card-radius); pointer-events:none; }
+    .pc-inside { inset:0; position:absolute; background-image:var(--inner-gradient); background-color:rgba(0,0,0,.9); transform:none; }
+
+    .pc-shine, .pc-glare { display:none !important; }
+    .pc-avatar-content { mix-blend-mode:normal; overflow:hidden; transform:translateZ(2); backface-visibility:hidden; }
+    .pc-avatar-content .avatar {
+      width:100%; height:100%; object-fit:cover; object-position:center top;
+      position:absolute; inset:0;
+      transform:scale(calc(1+(var(--pointer-from-top)-.5)*.03)) translateX(calc((var(--pointer-from-left)-.5)*6px));
+      backface-visibility:hidden; will-change:transform; transition:transform 120ms ease-out;
+    }
+    .pc-avatar-content::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; }
+
+    .pc-user-info {
+      position:absolute; --ui-inset:20px; --ui-radius-bias:6px;
+      bottom:var(--ui-inset); left:var(--ui-inset); right:var(--ui-inset); z-index:2;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(255,255,255,.1); backdrop-filter:blur(30px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:calc(max(0px,var(--card-radius)-var(--ui-inset)+var(--ui-radius-bias)));
+      padding:12px 14px; pointer-events:auto;
+    }
+    .pc-user-details { display:flex; align-items:center; gap:12px; }
+    .pc-mini-avatar { width:48px; height:48px; border-radius:50%; overflow:hidden; border:1px solid rgba(255,255,255,.1); flex-shrink:0; }
+    .pc-mini-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .pc-user-text { display:flex; align-items:flex-start; flex-direction:column; gap:6px; }
+    .pc-handle { font-size:14px; font-weight:500; color:rgba(255,255,255,.9); line-height:1; }
+    .pc-status { font-size:14px; color:rgba(255,255,255,.7); line-height:1; }
+    .pc-contact-btn {
+      border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:12px 16px;
+      font-size:12px; font-weight:600; color:rgba(255,255,255,.9); cursor:pointer;
+      transition:all .2s ease; backdrop-filter:blur(10px); background:transparent;
+    }
+    .pc-contact-btn:hover { border-color:rgba(255,255,255,.4); transform:translateY(-1px); }
+
+    .pc-content:not(.pc-avatar-content) { display:none !important; }
+
+    .card-block { display:flex; flex-direction:column; align-items:center; }
+    .card-info { margin-top:28px; }
+
+    .focus-container {
+      position:relative; display:flex; gap:.4em;
+      justify-content:center; align-items:center; flex-wrap:wrap;
+      outline:none; user-select:none;
+    }
+    .focus-word {
+      position:relative; font-size:1.4rem; font-weight:700; color:#fff;
+      cursor:default; outline:none; user-select:none;
+    }
+    .focus-frame {
+      position:absolute; top:0; left:0; pointer-events:none;
+      box-sizing:content-box; border:none;
+    }
+    .corner {
+      position:absolute; width:.8rem; height:.8rem;
+      border:2px solid var(--border-color,#60a5fa);
+      filter:drop-shadow(0 0 4px var(--glow-color,rgba(96,165,250,.6)));
+      border-radius:2px;
+    }
+    .top-left { top:-8px; left:-8px; border-right:none; border-bottom:none; }
+    .top-right { top:-8px; right:-8px; border-left:none; border-bottom:none; }
+    .bottom-left { bottom:-8px; left:-8px; border-right:none; border-top:none; }
+    .bottom-right { bottom:-8px; right:-8px; border-left:none; border-top:none; }
+
+    @keyframes glow-bg { 0%{--bgrotate:0deg} 100%{--bgrotate:360deg} }
+    @keyframes holo-bg {
+      0%{background-position:0 var(--background-y),0 0,center}
+      100%{background-position:0 var(--background-y),90% 90%,center}
+    }
+
+    /* Footer */
+    .contact-footer { padding:30px 0; border-top:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-between; align-items:center; }
+    .contact-footer p { font-size:.8rem; color:rgba(255,255,255,.2); }
+    .contact-footer-links { display:flex; gap:24px; }
+    .contact-footer-links a { font-size:.8rem; color:rgba(255,255,255,.3); transition:color .3s; }
+    .contact-footer-links a:hover { color:#fff; }
+
+    @media (max-width:768px) {
+      .pc-card { height:70svh; max-height:450px; }
+      .cards-row { gap:40px; }
+      .page { padding:100px 20px 60px; }
+    }
+    @media (max-width:480px) {
+      .pc-card { height:60svh; max-height:380px; }
+      .contact-footer { flex-direction:column; gap:12px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dot-grid-bg" id="dotGridBg"></div>
+
+  <a href="index.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>Back</a>
+
+  <div class="page">
+
+    <div class="contact-hero">
+      <span class="contact-label">Contact</span>
+      <h1 class="contact-title">If you <span>dream</span> it,<br>we can <span>build</span> it.</h1>
+    </div>
+
+    <div class="cards-row">
+      <div class="card-block">
+        <div class="pc-card-wrapper" id="card1"></div>
+        <div class="card-info" id="cardInfo1"></div>
+      </div>
+      <div class="card-block">
+        <div class="pc-card-wrapper" id="card2"></div>
+        <div class="card-info" id="cardInfo2"></div>
+      </div>
+    </div>
+
+    <div class="contact-footer">
+      <p>&copy; 2026 BlackBox. All rights reserved.</p>
+      <div class="contact-footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module">
+    import { initTrueFocus } from './js/truefocus.js';
+
+    initTrueFocus(document.getElementById('cardInfo1'), {
+      sentence: 'Nemanja Nikitovic',
+      blurAmount: 5,
+      borderColor: '#60a5fa',
+      glowColor: 'rgba(96, 165, 250, 0.6)',
+      animationDuration: 0.5,
+      pauseBetweenAnimations: 1
+    });
+
+    initTrueFocus(document.getElementById('cardInfo2'), {
+      sentence: 'Sasa Ostojic',
+      blurAmount: 5,
+      borderColor: '#60a5fa',
+      glowColor: 'rgba(96, 165, 250, 0.6)',
+      animationDuration: 0.5,
+      pauseBetweenAnimations: 1
+    });
+  </script>
+  <script type="module">
+    import { initProfileCard } from './js/profilecard.js';
+
+    initProfileCard(document.getElementById('card1'), {
+      name: '',
+      title: '',
+      avatarUrl: 'assets/avatar1.png',
+      showUserInfo: false,
+      enableTilt: true,
+      behindGlowColor: 'rgba(125, 190, 255, 0.67)',
+      innerGradient: 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)',
+      behindGlowEnabled: true
+    });
+
+    initProfileCard(document.getElementById('card2'), {
+      name: '',
+      title: '',
+      avatarUrl: 'assets/avatar2.png',
+      showUserInfo: false,
+      enableTilt: true,
+      behindGlowColor: 'rgba(125, 190, 255, 0.67)',
+      innerGradient: 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)',
+      behindGlowEnabled: true
+    });
+  </script>
+  <script type="module">
+    import { initDotGrid } from './js/dotgrid.js';
+    const bg = document.getElementById('dotGridBg');
+    if (bg) {
+      initDotGrid(bg, {
+        dotSize: 4, gap: 18,
+        baseColor: '#2a2545', activeColor: '#60a5fa',
+        proximity: 150, shockRadius: 250, shockStrength: 5,
+        resistance: 750, returnDuration: 1.5
+      });
+    }
+  </script>
+</body>
+</html>

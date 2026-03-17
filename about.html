@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackBox | About Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; --blue: #60a5fa; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); background: #0a0a14; color: #fff; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    .dot-grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .dot-grid-bg canvas { pointer-events: auto; }
+    .page { position: relative; z-index: 1; }
+
+    .back {
+      position: fixed; top: 24px; left: 24px; z-index: 50;
+      font-size: .8rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(96,165,250,.08);
+      border: 1px solid rgba(96,165,250,.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: all .3s ease;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .back svg { width: 14px; height: 14px; transition: transform .3s ease; }
+    .back:hover { color: #fff; background: rgba(96,165,250,.18); border-color: rgba(96,165,250,.45); box-shadow: 0 0 20px rgba(96,165,250,.15); }
+    .back:hover svg { transform: translateX(-3px); }
+
+    .page { max-width: 1100px; margin: 0 auto; padding: 120px 40px 80px; }
+
+    /* Hero */
+    .about-hero { text-align: center; margin-bottom: 100px; }
+    .about-label { display: block; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
+    .about-title { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 24px; }
+    .about-title span { color: var(--blue); }
+
+    /* Scrambled Text */
+    .scramble-section { margin-bottom: 100px; }
+    .text-block { max-width: 800px; margin: 0 auto; font-family: 'Courier New', monospace; font-size: clamp(14px, 2.5vw, 24px); color: rgba(255,255,255,.7); line-height: 1.8; cursor: default; }
+    .char { display: inline-block; will-change: transform; transition: color .1s; }
+
+    /* What We Do */
+    .section-label { display: block; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; letter-spacing: -.02em; margin-bottom: 40px; }
+
+    .what-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 100px; }
+    .what-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: all .3s ease;
+    }
+    .what-card:hover { background: rgba(96,165,250,.05); border-color: rgba(96,165,250,.2); transform: translateY(-4px); }
+    .what-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .what-card p { font-size: .9rem; line-height: 1.7; color: rgba(255,255,255,.6); font-weight: 400; }
+
+    /* Packages */
+    .packages { margin-bottom: 80px; }
+    .packages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .pkg {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 20px;
+      padding: 36px 28px;
+      display: flex; flex-direction: column;
+      transition: all .3s ease;
+      position: relative;
+    }
+    .pkg:hover { border-color: rgba(96,165,250,.25); transform: translateY(-4px); }
+    .pkg--premium { border-color: var(--blue); background: rgba(96,165,250,.06); }
+    .pkg--premium::before {
+      content: 'Most Popular';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: #000;
+      font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px;
+    }
+    .pkg-name { font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+    .pkg-price { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .pkg-period { font-size: .8rem; color: rgba(255,255,255,.25); margin-bottom: 24px; }
+    .pkg-features { list-style: none; flex: 1; margin-bottom: 28px; }
+    .pkg-features li {
+      font-size: .85rem; color: rgba(255,255,255,.5);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pkg-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+    .pkg-features li.feat-off { opacity: .25; }
+    .pkg-features li.feat-off::before { background: rgba(255,255,255,.2); }
+    .pkg-btn {
+      display: block; text-align: center;
+      padding: 12px; border-radius: 10px;
+      font-size: .85rem; font-weight: 600;
+      border: 1px solid rgba(255,255,255,.1);
+      color: #fff;
+      transition: all .3s ease;
+    }
+    .pkg-btn:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); }
+    .pkg--premium .pkg-btn { background: var(--blue); color: #000; border-color: var(--blue); }
+    .pkg--premium .pkg-btn:hover { background: #93c5fd; }
+
+    /* Footer */
+    .about-footer { padding: 30px 0; border-top: 1px solid rgba(255,255,255,.06); display: flex; justify-content: space-between; align-items: center; }
+    .about-footer p { font-size: .8rem; color: rgba(255,255,255,.2); }
+    .about-footer-links { display: flex; gap: 24px; }
+    .about-footer-links a { font-size: .8rem; color: rgba(255,255,255,.3); transition: color .3s; }
+    .about-footer-links a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .packages-grid { grid-template-columns: repeat(2, 1fr); }
+      .what-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page { padding: 100px 20px 60px; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .about-footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dot-grid-bg" id="dotGridBg"></div>
+
+  <a href="index.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>Back</a>
+
+  <div class="page">
+
+    <div class="about-hero">
+      <span class="about-label">About Us</span>
+      <h1 class="about-title">We don't just build websites.<br>We build <span>digital identities.</span></h1>
+    </div>
+
+    <div class="scramble-section">
+      <div class="text-block" id="scrambleText">
+        <p>BlackBox is a digital studio focused on crafting high-performance, visually striking websites that help brands stand out. We combine clean code with bold design to deliver experiences that convert visitors into customers. Every project starts with a conversation and ends with something we're both proud of.</p>
+      </div>
+    </div>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <h3>Web Design</h3>
+        <p>Custom layouts built from scratch. No templates, no shortcuts. Every pixel is intentional.</p>
+      </div>
+      <div class="what-card">
+        <h3>Development</h3>
+        <p>Clean, fast, responsive code. Built with modern tools and optimized for all devices.</p>
+      </div>
+      <div class="what-card">
+        <h3>Branding</h3>
+        <p>From logos to full brand systems. We define how your business looks and feels online.</p>
+      </div>
+      <div class="what-card">
+        <h3>SEO & Performance</h3>
+        <p>Search engine optimization, speed tuning, and analytics. We make sure you get found.</p>
+      </div>
+      <div class="what-card">
+        <h3>Content Strategy</h3>
+        <p>Copy, imagery, and structure that tells your story and guides users to action.</p>
+      </div>
+      <div class="what-card">
+        <h3>Ongoing Support</h3>
+        <p>Updates, maintenance, and improvements. We stay with your project after launch.</p>
+      </div>
+    </div>
+
+    <div class="packages">
+      <span class="section-label">Packages</span>
+      <h2 class="section-title">Choose the right plan for your project</h2>
+
+      <div class="packages-grid">
+
+        <div class="pkg">
+          <span class="pkg-name">Starter</span>
+          <span class="pkg-price">&euro;950</span>
+          <span class="pkg-period">One-time</span>
+          <ul class="pkg-features">
+            <li>Landing page (1 page)</li>
+            <li>Responsive design</li>
+            <li>Contact form</li>
+            <li>Basic SEO setup</li>
+            <li>2 revision rounds</li>
+            <li class="feat-off">Custom animations</li>
+            <li class="feat-off">Full SEO optimization</li>
+            <li class="feat-off">Priority support</li>
+          </ul>
+          <a href="mailto:hello@blackbox.com?subject=Starter%20Package" class="pkg-btn">Get Started</a>
+        </div>
+
+        <div class="pkg">
+          <span class="pkg-name">Business</span>
+          <span class="pkg-price">&euro;1,499</span>
+          <span class="pkg-period">One-time</span>
+          <ul class="pkg-features">
+            <li>Up to 5 pages</li>
+            <li>Responsive design</li>
+            <li>Contact form + Map</li>
+            <li>On-page SEO</li>
+            <li>3 revision rounds</li>
+            <li>Basic animations</li>
+            <li class="feat-off">Full SEO optimization</li>
+            <li class="feat-off">Priority support</li>
+          </ul>
+          <a href="mailto:hello@blackbox.com?subject=Business%20Package" class="pkg-btn">Get Started</a>
+        </div>
+
+        <div class="pkg pkg--premium">
+          <span class="pkg-name">Pro</span>
+          <span class="pkg-price">&euro;1,999</span>
+          <span class="pkg-period">One-time</span>
+          <ul class="pkg-features">
+            <li>Up to 10 pages</li>
+            <li>Fully responsive</li>
+            <li>Advanced forms & CMS</li>
+            <li>Full SEO optimization</li>
+            <li>Unlimited revisions</li>
+            <li>Custom 3D & animations</li>
+            <li>Analytics integration</li>
+            <li>Priority support (30 days)</li>
+          </ul>
+          <a href="mailto:hello@blackbox.com?subject=Pro%20Package" class="pkg-btn">Get Started</a>
+        </div>
+
+        <div class="pkg">
+          <span class="pkg-name">Premium</span>
+          <span class="pkg-price">&euro;3,499+</span>
+          <span class="pkg-period">Custom quote</span>
+          <ul class="pkg-features">
+            <li>Unlimited pages</li>
+            <li>Full-stack development</li>
+            <li>E-commerce / Web apps</li>
+            <li>Full SEO + Content strategy</li>
+            <li>Unlimited revisions</li>
+            <li>Custom 3D & interactions</li>
+            <li>Ongoing maintenance</li>
+            <li>Dedicated support (90 days)</li>
+          </ul>
+          <a href="mailto:hello@blackbox.com?subject=Premium%20Package" class="pkg-btn">Get Started</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="about-footer">
+      <p>&copy; 2026 BlackBox. All rights reserved.</p>
+      <div class="about-footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module">
+    import { initScrambledText } from './js/scrambledtext.js';
+    const el = document.getElementById('scrambleText');
+    if (el) {
+      initScrambledText(el, {
+        radius: 100,
+        duration: 1.2,
+        speed: 0.5,
+        scrambleChars: '.:'
+      });
+    }
+  </script>
+  <script type="module">
+    import { initDotGrid } from './js/dotgrid.js';
+    const bg = document.getElementById('dotGridBg');
+    if (bg) {
+      initDotGrid(bg, {
+        dotSize: 4,
+        gap: 18,
+        baseColor: '#2a2545',
+        activeColor: '#60a5fa',
+        proximity: 150,
+        shockRadius: 250,
+        shockStrength: 5,
+        resistance: 750,
+        returnDuration: 1.5
+      });
+    }
+  </script>
+  <script>
+    const reveals = document.querySelectorAll('.what-card, .pkg');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity .6s ease ${i * 0.08}s, transform .6s ease ${i * 0.08}s`;
+      io.observe(el);
+    });
+  </script>
+</body>
+</html>
