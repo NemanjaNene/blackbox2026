@@ -116,12 +116,27 @@
 
     @media (max-width: 900px) {
       .packages-grid { grid-template-columns: repeat(2, 1fr); }
-      .what-grid { grid-template-columns: 1fr; }
+      .what-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .page { padding: 100px 24px 60px; }
+      .about-hero { margin-bottom: 60px; }
+      .scramble-section { margin-bottom: 60px; }
+      .text-block { font-size: clamp(13px, 2.5vw, 20px); }
+      .back { top: 16px; left: 16px; padding: 8px 16px; font-size: .7rem; }
     }
     @media (max-width: 600px) {
-      .page { padding: 100px 20px 60px; }
+      .page { padding: 80px 16px 50px; }
       .packages-grid { grid-template-columns: 1fr; }
+      .what-grid { grid-template-columns: 1fr; }
       .about-footer { flex-direction: column; gap: 12px; text-align: center; }
+      .about-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .about-hero { margin-bottom: 40px; }
+      .scramble-section { margin-bottom: 40px; }
+      .what-card { padding: 24px 20px; }
+      .pkg { padding: 28px 22px; }
+      .pkg--premium::before { font-size: .6rem; padding: 3px 10px; }
+      .packages { margin-bottom: 50px; }
     }
   </style>
 </head>

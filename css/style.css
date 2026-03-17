@@ -142,6 +142,16 @@ img{max-width:100%;display:block}
 .hero-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(180,200,255,.7);margin-bottom:36px;max-width:480px}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,#0d0d2b);z-index:4;pointer-events:none}
 
+@media(max-width:768px){
+  .hero{min-height:80vh}
+  .hero-wrap{padding:0 24px;max-width:420px}
+}
+@media(max-width:480px){
+  .hero{min-height:70vh}
+  .hero-wrap{padding:0 20px;max-width:100%}
+  .hero-title{font-size:clamp(1.8rem,7vw,2.4rem)}
+}
+
 /* =============================================
    SITE OF THE WEEK
    ============================================= */
@@ -393,9 +403,18 @@ img{max-width:100%;display:block}
 .tc-box-label{font-size:.9rem;font-weight:500;color:rgba(200,215,255,.7);letter-spacing:-.01em;transition:color .35s}
 
 @media(max-width:768px){
+  .tc-section{padding:100px 0 0}
   .tc-wrap{grid-template-columns:1fr;gap:40px;text-align:center}
   .tc-desc{margin:0 auto}
   .tc-target-row{flex-wrap:wrap;justify-content:center}
+  .falling-text-container{min-height:280px}
+}
+@media(max-width:480px){
+  .tc-section{padding:70px 0 0}
+  .tc-wrap{gap:24px}
+  .tc-btn{padding:12px 24px;font-size:.85rem}
+  .tc-box{padding:24px 20px}
+  .falling-text-container{min-height:220px}
 }
 
 /* ===== CARD SWAP ===== */
@@ -464,6 +483,22 @@ img{max-width:100%;display:block}
   100%{transform:translateX(-50%)}
 }
 
+@media(max-width:768px){
+  .tools-section{padding:70px 0 80px}
+  .tools-heading{margin-bottom:40px}
+  .tool-chip{padding:12px 20px;font-size:.9rem;gap:10px}
+  .tool-chip svg{width:22px;height:22px}
+  .marquee-wrap::before,.marquee-wrap::after{width:60px}
+}
+@media(max-width:480px){
+  .tools-section{padding:50px 0 60px}
+  .tools-heading{margin-bottom:30px}
+  .tool-chip{padding:10px 16px;font-size:.8rem;gap:8px}
+  .tool-chip svg{width:18px;height:18px}
+  .marquee-wrap::before,.marquee-wrap::after{width:30px}
+  .marquee-row{gap:10px}
+}
+
 /* ===== CONTACT SECTION ===== */
 .contact-section{background:#fff;padding:100px 0 120px}
 .contact-wrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:80px}
@@ -493,7 +528,16 @@ img{max-width:100%;display:block}
 @media(max-width:768px){
   .contact-wrap{grid-template-columns:1fr;gap:40px;text-align:center}
   .contact-desc{margin-left:auto;margin-right:auto}
+  .contact-section{padding:70px 0 80px}
   .pixelated-image-card{width:280px}
+}
+@media(max-width:480px){
+  .contact-section{padding:50px 0 60px}
+  .contact-heading{margin-bottom:16px}
+  .contact-desc{font-size:.9rem}
+  .pixelated-image-card{width:240px}
+  .pt-phone-number{font-size:1.2rem}
+  .pt-phone-icon{width:48px;height:48px}
 }
 
 /* ===== FOOTER ===== */
