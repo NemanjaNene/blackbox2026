@@ -147,39 +147,41 @@
     </div>
 
     <form class="cf" id="contactForm" action="https://formspree.io/f/mojkgazl" method="POST">
+      <input type="hidden" name="_subject" value="New Project Inquiry — BlackBox">
+      <input type="hidden" name="_replyto" id="replyTo">
 
       <div class="cf-row">
         <div class="cf-group">
-          <label class="cf-label">Your Full Name<span class="req">*</span></label>
-          <input class="cf-input" type="text" name="name" placeholder="John Doe" required>
+          <label class="cf-label">Full Name<span class="req">*</span></label>
+          <input class="cf-input" type="text" name="Full Name" placeholder="John Doe" required>
         </div>
         <div class="cf-group">
-          <label class="cf-label">Your Company</label>
-          <input class="cf-input" type="text" name="company" placeholder="Acme Inc.">
+          <label class="cf-label">Company</label>
+          <input class="cf-input" type="text" name="Company" placeholder="Acme Inc.">
         </div>
       </div>
 
       <div class="cf-group">
         <label class="cf-label">Email Address<span class="req">*</span></label>
-        <input class="cf-input" type="email" name="email" placeholder="you@company.com" required>
+        <input class="cf-input" type="email" name="Email" id="emailInput" placeholder="you@company.com" required>
       </div>
 
       <div class="cf-group">
         <span class="cf-checks-title">Type of Work<span class="req">*</span></span>
         <span class="cf-checks-sub">Pick the areas you'd like to explore with us</span>
         <div class="cf-checks">
-          <label class="cf-check"><input type="checkbox" name="type" value="Web Design"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Web Design</span></label>
-          <label class="cf-check"><input type="checkbox" name="type" value="Branding"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Branding</span></label>
-          <label class="cf-check"><input type="checkbox" name="type" value="Development"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Development</span></label>
-          <label class="cf-check"><input type="checkbox" name="type" value="SEO"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">SEO</span></label>
-          <label class="cf-check"><input type="checkbox" name="type" value="Motion & 3D"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Motion & 3D</span></label>
-          <label class="cf-check"><input type="checkbox" name="type" value="Other"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Other / Not sure</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="Web Design"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Web Design</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="Branding"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Branding</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="Development"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Development</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="SEO"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">SEO</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="Motion & 3D"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Motion & 3D</span></label>
+          <label class="cf-check"><input type="checkbox" name="Services" value="Other"><span class="cf-checkmark"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="cf-check-text">Other / Not sure</span></label>
         </div>
       </div>
 
       <div class="cf-group">
-        <label class="cf-label">Tell us about your project</label>
-        <textarea class="cf-textarea" name="message" placeholder="Details, deadlines, budget etc."></textarea>
+        <label class="cf-label">Project Details</label>
+        <textarea class="cf-textarea" name="Project Details" placeholder="Details, deadlines, budget etc."></textarea>
       </div>
 
       <div class="cf-actions">
@@ -222,8 +224,12 @@
   <script>
     const form = document.getElementById('contactForm');
     const success = document.getElementById('cfSuccess');
+    const emailInput = document.getElementById('emailInput');
+    const replyTo = document.getElementById('replyTo');
+    emailInput.addEventListener('input', () => { replyTo.value = emailInput.value; });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      replyTo.value = emailInput.value;
       const data = new FormData(form);
       fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} })
         .then(r => {
