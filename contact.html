@@ -226,9 +226,11 @@
     const success = document.getElementById('cfSuccess');
     const emailInput = document.getElementById('emailInput');
     const replyTo = document.getElementById('replyTo');
+    let successTimer = null;
     emailInput.addEventListener('input', () => { replyTo.value = emailInput.value; });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (successTimer) { clearTimeout(successTimer); successTimer = null; }
       replyTo.value = emailInput.value;
       const data = new FormData(form);
       fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} })
@@ -236,6 +238,13 @@
           if (r.ok) {
             form.style.display = 'none';
             success.classList.add('show');
+            successTimer = setTimeout(() => {
+              success.classList.remove('show');
+              form.style.display = '';
+              form.reset();
+              replyTo.value = '';
+              successTimer = null;
+            }, 10000);
           }
         })
         .catch(() => {});
