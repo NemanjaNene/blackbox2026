@@ -14,8 +14,7 @@
   <script type="importmap">
   {
     "imports": {
-      "three": "https://esm.sh/three@0.170.0",
-      "three/examples/jsm/environments/RoomEnvironment.js": "https://esm.sh/three@0.170.0/examples/jsm/environments/RoomEnvironment.js"
+      "three": "https://esm.sh/three@0.170.0"
     }
   }
   </script>
@@ -65,7 +64,7 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <div class="hero-ballpit" id="heroBallpit"></div>
+    <div class="hero-beams" id="heroBeams"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-wrap">
       <h1 class="hero-title text-type" id="heroTextType" data-r></h1>
@@ -360,15 +359,17 @@
     }
   </script>
   <script type="module">
-    import { initBallpit } from './js/ballpit.js';
-    const bp = document.getElementById('heroBallpit');
-    if (bp) initBallpit(bp, {
-      count: 100,
-      gravity: 0.01,
-      friction: 0.9975,
-      wallBounce: 0.95,
-      followCursor: false,
-      colors: [0x060618, 0x3b82f6, 0x22d3ee]
+    import { initBeams } from './js/beams.js';
+    const bm = document.getElementById('heroBeams');
+    if (bm) initBeams(bm, {
+      beamWidth: 3,
+      beamHeight: 30,
+      beamNumber: 20,
+      lightColor: '#ffffff',
+      speed: 2,
+      noiseIntensity: 1.75,
+      scale: 0.2,
+      rotation: 30
     });
   </script>
 </body>
