@@ -37,13 +37,19 @@
     .contact-sub { font-size:1rem; color:rgba(255,255,255,.35); line-height:1.6; max-width:460px; margin:0 auto; }
 
     /* Form */
-    .cf { display:flex; flex-direction:column; gap:28px; margin-bottom:60px; }
+    .cf {
+      display:flex; flex-direction:column; gap:28px; margin-bottom:60px;
+      background:rgba(8,8,20,.85); border:1px solid rgba(96,165,250,.1);
+      border-radius:24px; padding:48px 40px;
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      box-shadow:0 4px 60px rgba(0,0,0,.5), 0 0 80px rgba(96,165,250,.04), inset 0 1px 0 rgba(255,255,255,.04);
+    }
     .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .cf-group { display:flex; flex-direction:column; gap:8px; }
     .cf-label { font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.55); }
     .cf-label .req { color:var(--blue); margin-left:2px; }
     .cf-input, .cf-textarea {
-      background:rgba(96,165,250,.03); border:1px solid rgba(96,165,250,.15);
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
       border-radius:12px; padding:16px 18px; font-size:.95rem; color:#fff;
       font-family:var(--font); transition:all .3s ease; outline:none;
     }
@@ -56,10 +62,10 @@
     .cf-checks { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .cf-check {
       display:flex; align-items:center; gap:10px; cursor:pointer;
-      padding:12px 16px; border-radius:10px; border:1px solid rgba(96,165,250,.12);
-      background:rgba(96,165,250,.03); transition:all .25s ease; user-select:none;
+      padding:12px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03); transition:all .25s ease; user-select:none;
     }
-    .cf-check:hover { background:rgba(96,165,250,.06); border-color:rgba(96,165,250,.25); }
+    .cf-check:hover { background:rgba(255,255,255,.06); border-color:rgba(96,165,250,.25); }
     .cf-check input { display:none; }
     .cf-checkmark {
       width:20px; height:20px; border-radius:6px; border:1.5px solid rgba(96,165,250,.3);
@@ -111,6 +117,7 @@
 
     @media (max-width:768px) {
       .page { padding:100px 20px 60px; }
+      .cf { padding:36px 28px; }
       .cf-row { grid-template-columns:1fr; }
       .cf-checks { grid-template-columns:1fr; }
       .contact-hero { margin-bottom:40px; }
@@ -118,6 +125,7 @@
     }
     @media (max-width:480px) {
       .page { padding:80px 16px 50px; }
+      .cf { padding:28px 20px; border-radius:18px; }
       .contact-hero { margin-bottom:30px; }
       .cf-actions { flex-direction:column; align-items:stretch; text-align:center; }
       .cf-submit, .cf-book { justify-content:center; }
