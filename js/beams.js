@@ -99,7 +99,7 @@ export function initBeams(container, {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000);
+  renderer.setClearColor(0x0a0a1a);
   container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
